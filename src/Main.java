@@ -14,21 +14,25 @@ public class Main {
         //float fSmall,fMedium,fLarge;
 
         List<Long> smallTimes=new ArrayList<>();
-        for (int i=1;i<=8;i=i*2){
+        List<Float> speedupSmall=new ArrayList<>();
+        for (int i=1;i<=4;i++){
             if(i==1){
 
                 smallTimes.add(Sort.sortSingle(smallList));
             }else{
                 smallTimes.add(Sort.sortMulti(smallList,i)[0]);
+                speedupSmall.add((float) smallTimes.getFirst()/smallTimes.get(i-1));
             }
         }
 
-         List<Long> mediumTimes=new ArrayList<>();
-        for (int i=1;i<=8;i=i*2){
+        List<Long> mediumTimes=new ArrayList<>();
+        List<Float> speedupMedium=new ArrayList<>();
+        for (int i=1;i<=4;i++){
             if(i==1){
                 mediumTimes.add(Sort.sortSingle(mediumList));
             }else{
                 mediumTimes.add(Sort.sortMulti(mediumList,i)[0]);
+                speedupMedium.add((float) mediumTimes.getFirst()/mediumTimes.get(i-1));
             }
         }
 
@@ -53,6 +57,7 @@ public class Main {
         //System.out.println("F large:" +calculateFLarge());
         System.out.println("Times for small file");
         System.out.println(smallTimes.toString());
+        System.out.println("Speedup small:"+speedupSmall.toString());
         System.out.println("Theoretical speedup S(P) =1/("+(1-fSmall)+")+"+fSmall+"/P)");
         System.out.println("So S(2)="+1/((1-fSmall)+fSmall/2));
         System.out.println("\n\n");
@@ -60,6 +65,7 @@ public class Main {
         float fMedium=calculateFMedium();
         System.out.println("Times for medium file");
         System.out.println(mediumTimes.toString());
+        System.out.println("Speedup medium:"+speedupMedium.toString());
         System.out.println("Theoretical speedup S(P) =1/("+(1-fMedium)+")+"+fMedium+"/P)");
         System.out.println("So S(2)="+1/((1-fMedium)+fMedium/2));
 
